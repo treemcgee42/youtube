@@ -1,0 +1,7 @@
+from manimlib.imports import *
+from NumberCreature.NumberCreature import *
+
+class ting(Scene):
+    def construct(self):
+        surface = SVGMobject(tangentspaces/localmanifold)
+        self.add(surface)
