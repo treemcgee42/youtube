@@ -130,7 +130,7 @@ class ex115(Scene):
             FadeOut(seq_n_graded)
         )
         self.play(
-            Transform(stable_vgroup, stable_vgroup.move_to((0,0,0)).shift(1*DOWN))
+            Transform(stable_vgroup, stable_vgroup.copy().move_to((0,0,0)).shift(1*DOWN))
         )
         self.wait(2)
         self.play(
@@ -282,3 +282,6 @@ class ex117(Scene):
             FadeIn(ex2)
         )
         self.wait(2)
+        self.play(
+            *[FadeOut(mob) for mob in self.mobjects]
+        )
