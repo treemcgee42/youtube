@@ -29,7 +29,6 @@ def tikz(filename, tex, file_name):
     media_directory = MANIM_LOC + "media/tikz/"
     tikz_template_loc = MANIM_LOC + "manimlib/" + TIKZ_TEMPLATE_FILE
     current_file_name = file_name
-    print(current_file_name)
     exit
     working_path = os.path.join(media_directory, current_file_name)
     new_tex_file = working_path + "/" + filename + ".tex"
@@ -40,7 +39,12 @@ def tikz(filename, tex, file_name):
         pass
 
     if not path.exists(new_tex_file):
-        open(new_tex_file, "x")    
+        open(new_tex_file, "x")
+    else:       # if the tex is the same as last time, don't run the whole thing again
+        with open(new_tex_file) as myfile:
+            if tex in myfile.read():
+                return ImageMobject(new_tex_file[:-4]+".png")
+
     copy(tikz_template_loc, working_path)       # temporary file
     os.replace(working_path + "/" + TIKZ_TEMPLATE_FILE, new_tex_file)
 
