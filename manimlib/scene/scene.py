@@ -14,6 +14,7 @@ from manimlib.container.container import Container
 from manimlib.mobject.mobject import Mobject
 from manimlib.scene.scene_file_writer import SceneFileWriter
 from manimlib.utils.iterables import list_update
+from manimlib.animation.fading import FadeIn, FadeOut
 
 
 class Scene(Container):
@@ -943,6 +944,29 @@ class Scene(Container):
         self.begin_animations(animations)
         self.progress_through_animations(animations)
         self.finish_animations(animations)
+
+    def cycle(self, mobs, out=True, successive=True, successive_pause=True):
+        """
+        I made this for personal use, it fades in Mobjects, waits, and
+        fades them out.
+        """
+        if not successive:
+            self.play(
+                *[FadeIn(mob) for mob in mobs]
+            )
+            self.wait(2)
+        else:
+            for mob in mobs:
+                self.play(
+                    FadeIn(mob)
+                )
+                if successive_pause:
+                    self.wait(2)
+
+        if out:
+            self.play(
+                *[FadeOut(mob) for mob in mobs]
+            )
 
     def idle_stream(self):
         """
