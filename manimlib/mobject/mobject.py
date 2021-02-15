@@ -431,6 +431,13 @@ class Mobject(Container):
                     buff * direction) * coor_mask)
         return self
 
+    # Purpose: aligns with make_title() mobject 
+    # Parameters: the title mobject of the scene
+    def to_title(self, title_mob):
+        self.next_to(title_mob, direction=DOWN, buff=1)
+        self.to_edge(LEFT, buff=.5)
+        return self
+
     def shift_onto_screen(self, **kwargs):
         space_lengths = [FRAME_X_RADIUS, FRAME_Y_RADIUS]
         for vect in UP, DOWN, LEFT, RIGHT:
