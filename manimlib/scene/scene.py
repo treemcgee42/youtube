@@ -15,6 +15,7 @@ from manimlib.mobject.mobject import Mobject
 from manimlib.scene.scene_file_writer import SceneFileWriter
 from manimlib.utils.iterables import list_update
 from manimlib.animation.fading import FadeIn, FadeOut
+from manimlib.animation.creation import Write
 
 
 class Scene(Container):
@@ -967,6 +968,15 @@ class Scene(Container):
             self.play(
                 *[FadeOut(mob) for mob in mobs]
             )
+
+    def title(self, mob):
+        """
+        To be used with make_title() in new_constructs.py
+        """
+        self.play(
+            Write(mob)
+        )
+        self.wait(2)
 
     def idle_stream(self):
         """
