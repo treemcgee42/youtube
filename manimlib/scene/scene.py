@@ -978,6 +978,16 @@ class Scene(Container):
         )
         self.wait(2)
 
+    def fade_replace(self, old_mob, new_mob):
+        """
+        Since Transform method doesn't work for pngs
+        """
+        self.play(
+            FadeOut(old_mob),
+            FadeIn(new_mob)
+        )
+        self.wait(2)
+
     def idle_stream(self):
         """
         This method is used internally to 
