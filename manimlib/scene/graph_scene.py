@@ -29,6 +29,7 @@ class GraphScene(Scene):
     CONFIG = {
         "x_min": -1,
         "x_max": 10,
+        "show_ticks": False,
         "x_axis_width": 9,
         "x_tick_frequency": 1,
         "x_leftmost_tick": None,  # Change if different from x_min
@@ -85,6 +86,7 @@ class GraphScene(Scene):
             x_min=self.x_min,
             x_max=self.x_max,
             unit_size=self.space_unit_to_x,
+            include_ticks = self.show_ticks,
             tick_frequency=self.x_tick_frequency,
             leftmost_tick=self.x_leftmost_tick,
             numbers_with_elongated_ticks=self.x_labeled_nums,
@@ -95,7 +97,7 @@ class GraphScene(Scene):
             if self.exclude_zero_label:
                 self.x_labeled_nums = [x for x in self.x_labeled_nums if x != 0]
             x_axis.add_numbers(*self.x_labeled_nums)
-        if self.x_axis_label:
+        if self.x_axis_label and self.show_ticks:
             x_label = TextMobject(self.x_axis_label)
             x_label.next_to(
                 x_axis.get_tick_marks(), UP + RIGHT,
@@ -116,6 +118,7 @@ class GraphScene(Scene):
             x_min=self.y_min,
             x_max=self.y_max,
             unit_size=self.space_unit_to_y,
+            include_ticks=self.show_ticks,
             tick_frequency=self.y_tick_frequency,
             leftmost_tick=self.y_bottom_tick,
             numbers_with_elongated_ticks=self.y_labeled_nums,
@@ -129,7 +132,7 @@ class GraphScene(Scene):
             if self.exclude_zero_label:
                 self.y_labeled_nums = [y for y in self.y_labeled_nums if y != 0]
             y_axis.add_numbers(*self.y_labeled_nums)
-        if self.y_axis_label:
+        if self.y_axis_label and self.show_ticks:
             y_label = TextMobject(self.y_axis_label)
             y_label.next_to(
                 y_axis.get_corner(UP + RIGHT), UP + RIGHT,
