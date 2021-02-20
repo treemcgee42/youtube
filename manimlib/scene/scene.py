@@ -988,6 +988,14 @@ class Scene(Container):
         )
         self.wait(2)
 
+    def clear(self):
+        """
+        Removes all mobjects from scene
+        """
+        self.play(
+            *[FadeOut(mob) for mob in self.mobjects]
+        )
+
     def idle_stream(self):
         """
         This method is used internally to 
