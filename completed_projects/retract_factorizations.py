@@ -1,6 +1,6 @@
 # Date: 2/18/21
 # Purpose: cor 2.11 - end w. fact. section nLab
-# Notes:
+# Notes: recorded 2/21
 
 from manimlib.imports import *
 fn = "retract_factorizations"
@@ -99,6 +99,7 @@ class lemma213(Scene):
         self.fade_replace(
             l2, l3
         )
+        self.clear()
 
 class prop214(Scene):
     """
