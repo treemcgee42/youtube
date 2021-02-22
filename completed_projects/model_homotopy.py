@@ -1,6 +1,6 @@
 # Date: 2/19/21
 # Purpose: homotopy subsection of abstract homotopy nLab section
-# Notes:
+# Notes: recorded 2/22
 
 from manimlib.imports import *
 fn = "model_homotopy"
@@ -64,11 +64,11 @@ class rmk219(Scene):
         self.title(t)
 
         r1 = TexMobject(r"""
-            \Delta_X: X \underset{\in W}{\longrightarrow}
-                    \text{Path}(X) \underset{\in W\cap\text{Fib}}{\longrightarrow} 
+            \Delta_X: X \underset{\in W\cap\text{Cof}}{\longrightarrow}
+                    \text{Path}(X) \underset{\in\text{Fib}}{\longrightarrow} 
                     X\times X \\
-            \nabla_X: X \sqcup X \underset{\in W\cap\text{Cof}}{\longrightarrow} 
-                    \text{Cyl}(X) \underset{\in W}{\longrightarrow} X 
+            \nabla_X: X \sqcup X \underset{\in\text{Cof}}{\longrightarrow} 
+                    \text{Cyl}(X) \underset{\in W\cap\text{Fib}}{\longrightarrow} X 
         """).scale(.75).shift(.5*LEFT)
 
         self.cycle(
