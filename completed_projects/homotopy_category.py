@@ -1,6 +1,6 @@
 # Date: 2/20/21
 # Purpose: homotopy category section nLab
-# Notes:
+# Notes: recorded 2/23/21
 
 from manimlib.imports import *
 fn = "homotopy_category"
@@ -394,9 +394,9 @@ class def230(Scene):
             equivalences, its ", "localization", " ", r"""
             at the weak equivalences is, if it exists,
             \begin{enumerate}
-                \item a category denoted $\mathcal{C}[W^{-1}]$
+                \item a category denoted $\mathcal{C}[W^{-1} ]$
                 \item a functor
-                    $$\gamma:\mathcal{C}\longrightarrow\mathcal{C}[W^{-1}]$$
+                    $$\gamma:\mathcal{C}\longrightarrow\mathcal{C}\left[W^{-1}\right]$$
             \end{enumerate}
         """, alignment="").scale(.75).to_title(t)
 
