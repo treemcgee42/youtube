@@ -336,7 +336,7 @@ class cor244(Scene):
 
 class prop245(Scene):
     """
-    We now these derived functors under the hood send weak equivalences to weak equivalences.
+    We know these derived functors under the hood send weak equivalences to weak equivalences.
     But what does it do to objects? Well, if F preserves fibrant objects and weak equivalences
     between them, then the total right derived functor, sends an object X in C to the
     cofibrant replacement of F of the fibrant replacement of X, i.e. QF(PX).
