@@ -5,6 +5,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{amstext}
 \usepackage{dsfont}
 \usepackage{setspace}
 \usepackage{tipa}
@@ -23,6 +24,122 @@
 \linespread{1}
 
 \newcommand{\underoverset}[3]{\underset{#1}{\overset{#2}{#3}}} 
+
+% for text in math mode
+\makeatletter
+\usepackage{etexcmds}
+\newtoks\m@toks@math
+\newtoks\m@toks@text
+
+\edef\m@tmp@restore{%
+  \lccode\number`\X=\the\lccode`\X\relax
+  \lccode\number`\~=\the\lccode`\~\relax
+}
+
+\newcommand*{\m@activate}{}
+\newcommand*{\m@check@letter}{}
+\newcommand*{\m@check@fi}{}
+
+\newif\ifm@single
+
+\let\m@start\relax
+\def\m@loop{%
+  \lccode`\X=\count@
+  \lccode`\~=\count@
+  \lowercase{%
+    \expandafter\mathchardef\csname m@code@X\endcsname=\mathcode\count@
+    \edef\m@activate{%
+      \etex@unexpanded\expandafter{\m@activate}%
+      \mathcode\the\count@="8000\relax
+      \def\noexpand~{\m@start\csname m@code@X\endcsname X}%
+    }%
+    \g@addto@macro\m@check@letter{%
+      \ifx\@let@token X\else
+    }%
+  }%
+  \g@addto@macro\m@check@fi{\fi}%
+  \advance\count@\@ne
+}
+% A-Z
+\count@=`\A\relax
+\@whilenum\count@<\numexpr`\Z+1\relax\do{\m@loop}
+% a-z
+\count@=`\a\relax
+\@whilenum\count@<\numexpr`\z+1\relax\do{\m@loop}
+
+\newcommand*{\m@start}[2]{%
+  \bgroup
+  \m@toks@math{#1}%
+  \m@toks@text{#2}%
+  \m@singletrue
+  \futurelet\@let@token\m@check
+}
+\edef\m@check{%
+  \etex@unexpanded{%
+    \let\m@next\m@add
+    \ifx\@let@token\space
+      \let\m@next\m@finish
+    \else
+      \ifx\@let@token\egroup
+        \let\m@next\m@finish
+      \else
+  }%
+  \etex@unexpanded\expandafter{%
+        \m@check@letter
+  }%
+  \etex@unexpanded{%
+          \let\m@next\m@finish
+  }%
+  \etex@unexpanded\expandafter{%
+        \m@check@fi
+  }%
+  \etex@unexpanded{%
+      \fi
+    \fi
+    \m@next
+  }%
+}
+
+\newcommand*{\m@add}[1]{%
+  \m@singlefalse
+  \m@toks@math\expandafter{%
+    \the\expandafter\m@toks@math
+    \csname m@code@#1\endcsname
+  }%
+  \m@toks@text\expandafter{%
+    \the\m@toks@text
+    #1%
+  }%
+  \futurelet\@let@token\m@check
+}
+
+\newcommand*{\m@finish}{%
+  \ifm@single
+    \expandafter\mprintsingle\expandafter{%
+      \the\expandafter\m@toks@math\expandafter
+    }\expandafter{%
+      \the\expandafter\m@toks@text\expandafter
+    }%
+  \else
+    \expandafter\mprintmulti\expandafter{%
+      \the\expandafter\m@toks@math\expandafter
+    }\expandafter{%
+      \the\expandafter\m@toks@text\expandafter
+    }%
+  \fi
+  \egroup
+}
+\let\mprintsingle\@firstoftwo
+\let\mprintmulti\@firstoftwo
+
+\everymath{\m@activate}
+\everydisplay{\m@activate}
+
+\m@tmp@restore
+\makeatother
+
+\renewcommand*{\mprintsingle}[2]{#1}% the default
+\renewcommand*{\mprintmulti}[2]{\text{#2}}
 
 \def\aa{\{}
 \def\bb{\}}
