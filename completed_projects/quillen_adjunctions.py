@@ -1,6 +1,6 @@
 # Date: 2/21/21
 # Purpose: quillen adjunctions section nLab
-# Notes:
+# Notes: recorded 2/27
 
 from manimlib.imports import *
 fn = "quillen_adjunctions"
@@ -192,7 +192,7 @@ class lemma248(Scene):
     A neat property of adjoints is that right adjoints preserve limits and left adjoints
     preserve colimits. Hence L of X disjoint union X is LX disjoint union LX. Well
     then we can pull out the codiagonal map like so, observing that L preserves
-    cofibrations. Furthermore since X was assumed to be cofibrant, we in fact have
+    cofibrations. 
     Well since X is cofibrant, a map from X to Cyl X is an acyclic cofibration, and
     so LX to L Cyl X is also. Consider then the triangle L Cyl X and LX and another LX,
     and by two out of three we see LCyl X to X is a weak equivalence, and we are done.
@@ -227,9 +227,9 @@ class lemma248(Scene):
                 & L(\text{Cyl}(X))
                     \arrow{dr}
                     & \\
-                X
+                LX
                     \arrow{ur}\arrow{rr}
-                    & & X
+                    & & LX
             \end{tikzcd}
         """, fn).next_to(l2, direction=DOWN, buff=1.5)
 
