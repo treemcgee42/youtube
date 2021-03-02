@@ -1,6 +1,6 @@
 # Date: 2/22/21
 # Purpose: prelude section 3 nLab
-# Notes:
+# Notes: recorded 3/1
 
 from manimlib.imports import *
 fn = "model_top"
